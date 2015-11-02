@@ -7,3 +7,6 @@ C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\I
 C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosaic_Image\Mosaic_Image\obj\Debug\Mosaic_Image.exe
 C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosaic_Image\Mosaic_Image\obj\Debug\Mosaic_Image.pdb
 C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosaic_Image\Mosaic_Image\obj\Debug\Mosaic_Image.csprojResolveAssemblyReference.cache
+C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\bin\Debug\Mosaic_Image.exe.config
+C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\obj\Debug\Mosaic_Image.exe
+C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\obj\Debug\Mosaic_Image.pdb

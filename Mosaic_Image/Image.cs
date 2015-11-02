@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Image Class
 namespace Mosaic_Image
 {
     public class Image
