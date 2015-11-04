@@ -28,11 +28,13 @@ namespace Mosaic_Image
 
         private void TileBtn_Click(object sender, EventArgs e)
         {
+            TileImgDneLbl.Text = "Please Select Tile Images Folder...";
             FolderBrowserDialog folderBrowser  =new FolderBrowserDialog();
             DialogResult result = folderBrowser.ShowDialog();
 
             if (result == DialogResult.OK)
             {
+                TileImgDneLbl.Text = "Please Wait...";
                 string folderPath = folderBrowser.SelectedPath;
                 ProcessDirectory(folderPath);
 
@@ -42,13 +44,15 @@ namespace Mosaic_Image
                     Color clr = Color.FromArgb(img.red, img.green, img.blue);
                     AvgClrList.Add(clr);
                 }
-
+                TileImgDneLbl.Text = "Done!";
                 Console.WriteLine("Processing All files - Done!!!");
             }
         }
 
         private void TargetBtn_Click(object sender, EventArgs e)
         {
+
+            TrgtImgDneLbl.Text = "Plaese Select Target Image...";
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
             fileDialog.FilterIndex = 1;
@@ -58,11 +62,13 @@ namespace Mosaic_Image
 
             if (result == DialogResult.OK)
             {
+                TrgtImgDneLbl.Text = "Please Wait...";
                 string imagePath = fileDialog.FileName;
                 TargetImage = new Bitmap(imagePath);
                 TimageFormat = TargetImage.PixelFormat;
+                
             }
-
+            TrgtImgDneLbl.Text = "Done!";
         }
 
         private void MosiacBtn_Click(object sender, EventArgs e)
@@ -95,11 +101,15 @@ namespace Mosaic_Image
             int i = 1;
             foreach (string file in files)
             {
-                Bitmap image = new Bitmap(file);
-                Image_mos imageInfo = getImageAvgs(image, file);
-                imageList.Add(imageInfo);
+                using (Bitmap image = new Bitmap(file))
+                {
+                    Image_mos imageInfo = getImageAvgs(image, file);
+                    imageList.Add(imageInfo);
+                }
+                
                 Console.WriteLine(i + " " + file);
                 i++;
+                
             }
             return imageList;
         }
@@ -171,7 +181,7 @@ namespace Mosaic_Image
             }
             else
             {
-                imageInforList = getImages(files);
+                TileImageList = getImages(files);
                 string imagesJson = serializer.Serialize(imageInforList);
 
                 File.WriteAllText(DirectoryPath + @"\ImagesInfo.json", imagesJson);
@@ -187,6 +197,7 @@ namespace Mosaic_Image
 
         public void processTagetImage(Bitmap Timage)
         {
+            MosiacImgDneLbl.Text = "Mosiac Creating, Please Wait...";
             int nextX = 1;
             int nextY = 1;
             int tileSize = 5;
@@ -239,6 +250,7 @@ namespace Mosaic_Image
             Bitmap output = new Bitmap(outputImage, Timage.Size);
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             output.Save(desktopPath+@"\output.jpg", ImageFormat.Jpeg);
+            MosiacImgDneLbl.Text = "Mosiac Dreated at, Desktop as \"output.jpg\"";
         }
 
 

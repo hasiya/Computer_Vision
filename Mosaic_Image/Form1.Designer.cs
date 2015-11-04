@@ -33,6 +33,9 @@
             this.TargetBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.MosiacBtn = new System.Windows.Forms.Button();
+            this.TrgtImgDneLbl = new System.Windows.Forms.Label();
+            this.TileImgDneLbl = new System.Windows.Forms.Label();
+            this.MosiacImgDneLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TileBtn
@@ -83,11 +86,38 @@
             this.MosiacBtn.UseVisualStyleBackColor = true;
             this.MosiacBtn.Click += new System.EventHandler(this.MosiacBtn_Click);
             // 
+            // TrgtImgDneLbl
+            // 
+            this.TrgtImgDneLbl.AutoSize = true;
+            this.TrgtImgDneLbl.Location = new System.Drawing.Point(240, 65);
+            this.TrgtImgDneLbl.Name = "TrgtImgDneLbl";
+            this.TrgtImgDneLbl.Size = new System.Drawing.Size(0, 13);
+            this.TrgtImgDneLbl.TabIndex = 5;
+            // 
+            // TileImgDneLbl
+            // 
+            this.TileImgDneLbl.AutoSize = true;
+            this.TileImgDneLbl.Location = new System.Drawing.Point(240, 106);
+            this.TileImgDneLbl.Name = "TileImgDneLbl";
+            this.TileImgDneLbl.Size = new System.Drawing.Size(0, 13);
+            this.TileImgDneLbl.TabIndex = 6;
+            // 
+            // MosiacImgDneLbl
+            // 
+            this.MosiacImgDneLbl.AutoSize = true;
+            this.MosiacImgDneLbl.Location = new System.Drawing.Point(191, 151);
+            this.MosiacImgDneLbl.Name = "MosiacImgDneLbl";
+            this.MosiacImgDneLbl.Size = new System.Drawing.Size(0, 13);
+            this.MosiacImgDneLbl.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(336, 261);
+            this.ClientSize = new System.Drawing.Size(441, 261);
+            this.Controls.Add(this.MosiacImgDneLbl);
+            this.Controls.Add(this.TileImgDneLbl);
+            this.Controls.Add(this.TrgtImgDneLbl);
             this.Controls.Add(this.MosiacBtn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TargetBtn);
@@ -107,6 +137,9 @@
         private System.Windows.Forms.Button TargetBtn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button MosiacBtn;
+        private System.Windows.Forms.Label TrgtImgDneLbl;
+        private System.Windows.Forms.Label TileImgDneLbl;
+        private System.Windows.Forms.Label MosiacImgDneLbl;
 
     }
 }
