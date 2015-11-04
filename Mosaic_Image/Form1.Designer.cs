@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TargetBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.MosiacBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TileBtn
@@ -72,11 +73,22 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Select Taget Image";
             // 
+            // MosiacBtn
+            // 
+            this.MosiacBtn.Location = new System.Drawing.Point(79, 146);
+            this.MosiacBtn.Name = "MosiacBtn";
+            this.MosiacBtn.Size = new System.Drawing.Size(106, 23);
+            this.MosiacBtn.TabIndex = 4;
+            this.MosiacBtn.Text = "Create Mosiac";
+            this.MosiacBtn.UseVisualStyleBackColor = true;
+            this.MosiacBtn.Click += new System.EventHandler(this.MosiacBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(336, 261);
+            this.Controls.Add(this.MosiacBtn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TargetBtn);
             this.Controls.Add(this.label1);
@@ -94,6 +106,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button TargetBtn;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button MosiacBtn;
 
     }
 }

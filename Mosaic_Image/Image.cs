@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 //Image Class
 namespace Mosaic_Image
 {
-    public class Image
+    public class Image_mos
     {
         public int red { get; set; }
         public int green { get; set; }
