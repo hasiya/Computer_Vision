@@ -8,11 +8,13 @@ C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\I
 C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosaic_Image\Mosaic_Image\obj\Debug\Mosaic_Image.pdb
 C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosaic_Image\Mosaic_Image\obj\Debug\Mosaic_Image.csprojResolveAssemblyReference.cache
 C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\bin\Debug\Mosaic_Image.exe.config
-C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\obj\Debug\Mosaic_Image.exe
-C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\obj\Debug\Mosaic_Image.pdb
 C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\bin\Debug\Mosaic_Image.exe
 C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\bin\Debug\Mosaic_Image.pdb
+C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\obj\Debug\Interop.MLApp.dll
+C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\obj\Debug\Mosaic_Image.csproj.ResolveComReference.cache
 C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\obj\Debug\Mosaic_Image.Form1.resources
 C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\obj\Debug\Mosaic_Image.Properties.Resources.resources
 C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\obj\Debug\Mosaic_Image.csproj.GenerateResource.Cache
+C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\obj\Debug\Mosaic_Image.exe
+C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\obj\Debug\Mosaic_Image.pdb
 C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Mosaic_Image\obj\Debug\Mosaic_Image.csprojResolveAssemblyReference.cache
