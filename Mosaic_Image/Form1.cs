@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Web.Script.Serialization;
 using System.Drawing.Imaging;
 using MLApp;
+using System.Runtime.InteropServices;
 
 namespace Mosaic_Image
 {
@@ -18,7 +19,6 @@ namespace Mosaic_Image
     {
         MLApp.MLApp matlab;
         BackgroundWorker TileProcess;
-        //BackgroundWorker TileNatProcess;
         BackgroundWorker MosiacProcess;
         BackgroundWorker MatLabProcess;
         Bitmap TargetImage;
@@ -26,9 +26,10 @@ namespace Mosaic_Image
         List<Image_mos> TileImageList = new List<Image_mos>();
         List<Color> AvgClrList = new List<Color>();
         Bitmap usedtempTile;
-
-        string Manmade = @"C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Images\Manall";
-        string Natural = @"C:\Users\Rajith Hasith\OneDrive\University\Marsters\Computer Vision\Assignment\Images\Mosiac\Images\NatAll";
+        
+        string startupPath = Environment.CurrentDirectory;
+        string Manmade = @"\Images\Manall\";
+        string Natural = @"\Images\NatAll\";
         string TilesFolder;
 
         string folderPath;
@@ -46,15 +47,11 @@ namespace Mosaic_Image
             TileProcess.WorkerReportsProgress = true;
             TileProcess.WorkerSupportsCancellation = true;
 
-            //TileNatProcess.WorkerReportsProgress = true;
-            //TileNatProcess.WorkerSupportsCancellation = true;
-
             MosiacProcess.WorkerReportsProgress = true;
             MosiacProcess.WorkerSupportsCancellation = true;
 
             ImageBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pers.Text = "";
-           // Tile_nat_Btn.Enabled = false;
             Tile_Brws_Btn.Enabled = false;
             tileSize.Enabled = false;
             MosaicBtn.Enabled = false;
@@ -71,16 +68,6 @@ namespace Mosaic_Image
             TileProcess.RunWorkerCompleted +=
                 new RunWorkerCompletedEventHandler(
             TileBackground_RunWorkerCompleted);
-            //backgroundWork.ProgressChanged +=
-            //    new ProgressChangedEventHandler(
-            //backgroundWorker1_ProgressChanged);
-
-            //TileNatProcess = new BackgroundWorker();
-            //TileNatProcess.DoWork +=
-            //    new DoWorkEventHandler(TileNatBackground_DoWork);
-            //TileNatProcess.RunWorkerCompleted +=
-            //    new RunWorkerCompletedEventHandler(
-            //TileNatBackground_RunWorkerCompleted);
 
             MosiacProcess = new BackgroundWorker();
             MosiacProcess.DoWork += new DoWorkEventHandler(MosiacBackground_DoWork);
@@ -110,11 +97,6 @@ namespace Mosaic_Image
         
         private void MosiacBackground_ProgressChanges(object sender, ProgressChangedEventArgs e)
         {
-            //Dispatcher.Invoke((Action)(() =>
-            //{
-            //    ImageProgressBar.Value = e.ProgressPercentage;
-            //    pers.Text =(e.ProgressPercentage.ToString() + "%");
-            //}));
             ImageBox.Image = tmpOut;
             ImageProgressBar.Value = e.ProgressPercentage;
             pers.Text = (e.ProgressPercentage.ToString() + "% of the Mosaic Created...");
@@ -146,31 +128,6 @@ namespace Mosaic_Image
             processTagetImage((Bitmap)e.Argument);
         }
 
-        //private void Tile_nat_Btn_Click(object sender, EventArgs e)
-        //{
-        //    Tile_nat_DneTxt.Text = "Please Select Natural Images Folder...";
-        //    FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
-        //    DialogResult result = folderBrowser.ShowDialog();
-
-        //    if (result == DialogResult.OK)
-        //    {
-        //        Tile_nat_DneTxt.Text = "Please Wait...";
-        //        folderPath = folderBrowser.SelectedPath;
-        //        //if ((Tile_man_DneTxt.Text == "Please Wait...") && (Tile_nat_DneTxt.Text == "Please Wait..."))
-        //        //{
-        //        //    tileSize.Enabled = true;
-        //        //}
-        //        //ProcessDirectory(folderPath);
-        //        //TileManProcess.RunWorkerAsync(folderPath);
-        //        TileNatProcess.RunWorkerAsync(folderPath);
-                
-        //    }
-        //    else
-        //    {
-        //        Tile_nat_DneTxt.Text = "Please Select Natural Images Folder...";
-        //        tileSize.Enabled = false;
-        //    }
-        //}
 
         private void Tile_Brws_Btn_Click(object sender, EventArgs e)
         {
@@ -182,11 +139,6 @@ namespace Mosaic_Image
             {
                 Tile_man_DneTxt.Text = "Please Wait...";
                 folderPath = folderBrowser.SelectedPath;
-                //if ((Tile_man_DneTxt.Text == "Please Wait...") && (Tile_nat_DneTxt.Text == "Please Wait..."))
-                //{
-                //    tileSize.Enabled = true;
-                //}
-                //ProcessDirectory(folderPath);
                 TileProcess.RunWorkerAsync(folderPath);
                 
             }
@@ -223,34 +175,6 @@ namespace Mosaic_Image
             }
         }
 
-        //private void TileNatBackground_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //    BackgroundWorker worker = sender as BackgroundWorker;
-
-        //    ProcessDirectory((string)e.Argument);
-        //}
-
-        //private void TileNatBackground_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        //{
-        //    if (e.Error != null)
-        //    {
-        //        MessageBox.Show(e.Error.Message);
-        //    }
-        //    else if (e.Cancelled)
-        //    {
-        //        Tile_nat_DneTxt.Text = "Cancelled!";
-        //    }
-        //    else
-        //    {
-        //        Tile_nat_DneTxt.Text = "Done!";
-        //        Console.WriteLine("Processing All files - Done!!!");
-        //        if ((Tile_man_DneTxt.Text == "Done!") && (Tile_nat_DneTxt.Text == "Done!"))
-        //        {
-        //            tileSize.Enabled = true;
-        //        }
-        //    }
-        //}
-
         private void TargetBtn_Click(object sender, EventArgs e)
         {
 
@@ -273,18 +197,17 @@ namespace Mosaic_Image
 
                 if (Catogary == "Man")
                 {
-                    TilesFolder = Manmade;
+                    TilesFolder = startupPath + Manmade;
                 }
                 else if (Catogary == "Nat")
                 {
-                    TilesFolder = Natural;
+                    TilesFolder = startupPath + Natural;
                 }
 
                 TrgtImgDneTxt.Text = "Done!";
                 ImageBox.Image = TargetImage;
                 Tile_Brws_Btn.Enabled = true;
                 tileSize.Enabled = true;
-                //Tile_nat_Btn.Enabled = true;
             }
             else
             {
@@ -292,7 +215,6 @@ namespace Mosaic_Image
                 ImageBox.Image = null;
                 Tile_Brws_Btn.Enabled = false;
                 tileSize.Enabled = false;
-               // Tile_nat_Btn.Enabled = false;
             }
 
             
@@ -301,7 +223,6 @@ namespace Mosaic_Image
 
         private void MosiacBtn_Click(object sender, EventArgs e)
         {
-            // processTagetImage(TargetImage);
             HighestPerc = 0;
             MosiacImgDneTxt.Text = "Mosiac Creating, Please Wait...";
             MosiacProcess.RunWorkerAsync(TargetImage);
@@ -334,14 +255,11 @@ namespace Mosaic_Image
             int i = 1;
             foreach (string file in files)
             {
-                //if (Catogary == ClassifyImage(file))
-                //{
                 using (Bitmap image = new Bitmap(file))
                 {
                     Image_mos imageInfo = getImageAvgs(image, file);
                     imageList.Add(imageInfo);
                 }
-                //}
 
                 Console.WriteLine(i + " " + file);
                 i++;
@@ -352,48 +270,11 @@ namespace Mosaic_Image
 
         public Image_mos getImageAvgs(Bitmap imagefile, string filePath)
         {
-
-            //Color avgClr = getAvgClr(imagefile);
-            Color avgClr = getAverageColour(imagefile);
-
-            Image_mos image = new Image_mos { filepath = filePath, red = avgClr.R, green = avgClr.G, blue = avgClr.B };
+            Color meanClr = getMeanColour(imagefile);
+            string fileName = filePath.Split('\\').Last().ToString();
+            Image_mos image = new Image_mos { filName = fileName, red = meanClr.R, green = meanClr.G, blue = meanClr.B };
 
             return image;
-        }
-
-        public Color getAvgClr(Bitmap imagefile)
-        {
-
-            List<Image_mos> images = new List<Image_mos>();
-            //Bitmap image1 = image;
-
-            long red = 0;
-            long green = 0;
-            long blue = 0;
-
-            long total = 0;
-
-            for (int x = 0; x < imagefile.Width; x++)
-            {
-                for (int y = 0; y < imagefile.Height; y++)
-                {
-                    Color clr = imagefile.GetPixel(x, y);
-
-                    red += clr.R;
-                    green += clr.G;
-                    blue += clr.B;
-
-                    total++;
-                }
-            }
-
-            red /= total;
-            green /= total;
-            blue /= total;
-
-            Color AvgClr = Color.FromArgb((int)red, (int)green, (int)blue);
-
-            return AvgClr;
         }
 
         public void createJson(string[] files, string DirectoryPath)
@@ -402,22 +283,14 @@ namespace Mosaic_Image
 
             if (checkJsonExist(DirectoryPath))
             {
-                // get the list of image information. 
-
                 string json = File.ReadAllText(DirectoryPath + @"\ImagesInfo.json");
 
-                List<Image_mos> ImageAvgList = serializer.Deserialize<List<Image_mos>>(json);
+                List<Image_mos> ImageMeanList = serializer.Deserialize<List<Image_mos>>(json);
                 
-                foreach(Image_mos image in ImageAvgList)
+                foreach(Image_mos image in ImageMeanList)
                 {
-                    //if (Catogary == ClassifyImage(image.filepath))
-                    //{
                         TileImageList.Add(image);
-                    //}
                 }
-                //TileImageList.AddRange(ImageAvgList);
-
-                int a = 1;
             }
             else
             {
@@ -427,13 +300,6 @@ namespace Mosaic_Image
                 File.WriteAllText(DirectoryPath + @"\ImagesInfo.json", imagesJson);
                 Console.WriteLine("Json created on " + DirectoryPath);
             }
-
-            //foreach (Image_mos img in TileImageList)
-            //{
-            //    string filepath = img.filepath;
-            //    Color clr = Color.FromArgb(img.red, img.green, img.blue);
-            //    AvgClrList.Add(clr);
-            //}
         }
 
         public bool checkJsonExist(string directoryPath)
@@ -445,16 +311,13 @@ namespace Mosaic_Image
         Bitmap tmpOut;
         public void processTagetImage(Bitmap Timage)
         {
-
-            int nextX = 1;
-            int nextY = 1;
-
+            
             string[] files = Directory.GetFiles(TilesFolder);
             createJson(files, TilesFolder);
 
             foreach (Image_mos img in TileImageList)
             {
-                string filepath = img.filepath;
+                string filepath = TilesFolder + img.filName;
                 Color clr = Color.FromArgb(img.red, img.green, img.blue);
                 AvgClrList.Add(clr);
             }
@@ -465,17 +328,16 @@ namespace Mosaic_Image
             Graphics g = Graphics.FromImage(tmpOut);
 
             List<KeyValuePair<string, Bitmap>> usedTiles = new List<KeyValuePair<string, Bitmap>>();
-            int numOfPixels = 0;
             int percentage = 0;
+
             for (int x = 0; x < resizedTimage.Width; x += tilePixSize)
             {
                 for (int y = 0; y < resizedTimage.Height; y += tilePixSize)
                 {
-
                     Rectangle tileRect = new Rectangle(x, y, tilePixSize, tilePixSize);
                     Bitmap tile = resizedTimage.Clone(tileRect, TimageFormat);
 
-                    Color clr = getAverageColour(tile);
+                    Color clr = getMeanColour(tile);
 
                     int closestcolrIndex = closestColor(AvgClrList, clr);
                     Image_mos tileImageinfo = TileImageList.ElementAt(closestcolrIndex);
@@ -483,34 +345,29 @@ namespace Mosaic_Image
                     Rectangle destRct = new Rectangle(x, y, tilePixSize, tilePixSize);
                     Rectangle srcRct = new Rectangle(0, 0, tilePixSize, tilePixSize);
 
-                    if (isTileExist(usedTiles, tileImageinfo.filepath))
+                    if (isTileExist(usedTiles, tileImageinfo.filName))
                     {
                         g.DrawImage(usedtempTile, destRct, srcRct, GraphicsUnit.Pixel);
                     }
                     else
                     {
-                        using (Image tileImg = Image.FromFile(tileImageinfo.filepath))
+                        using (Image tileImg = Image.FromFile(TilesFolder + tileImageinfo.filName))
                         {
                             Bitmap tileimage = new Bitmap(tileImg, tilePixSize, tilePixSize);
 
-                            usedTiles.Add(new KeyValuePair<string, Bitmap>(tileImageinfo.filepath, tileimage));
+                            usedTiles.Add(new KeyValuePair<string, Bitmap>(tileImageinfo.filName, tileimage));
 
                             g.DrawImage(tileimage, destRct, srcRct, GraphicsUnit.Pixel);
                         }
                     }
 
-                    numOfPixels++;
-
-
                     percentage = Convert.ToInt32((((float)(x * resizedTimage.Height) + y) / (float)(resizedTimage.Width * resizedTimage.Height)) * 100);
-                    //(int)((float)(numOfPixels*(tilePixSize*tilePixSize)) / (float)(resizedTimage.Width * resizedTimage.Height))*100;
 
                     if (percentage > HighestPerc)
                     {
                         HighestPerc = percentage;
                         MosiacProcess.ReportProgress(percentage);
                     }
-
                 }
             }
 
@@ -541,15 +398,15 @@ namespace Mosaic_Image
             return colors.FindIndex(n => ColorDiff(n, target) == colorDiffs);
         }
 
-        public static Color getAverageColour(Bitmap bmp)
+        public static Color getMeanColour(Bitmap bmp)
         {
-            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, bmp.Width, bmp.Height);
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
             //lock bits from image into rectangle and into bitmapdata
-            System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadOnly, bmp.PixelFormat);
+            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadOnly, bmp.PixelFormat);
             IntPtr ptr = bmpData.Scan0;
             int bytes = bmpData.Stride * bmp.Height;
             byte[] rgbValues = new byte[bytes];
-            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
+            Marshal.Copy(ptr, rgbValues, 0, bytes);
             long red = 0; //ints that hold the total of each colour in the image
             long green = 0;
             long blue = 0;
@@ -557,7 +414,7 @@ namespace Mosaic_Image
             {
                 for (int y = 0; y < bmp.Height; y++)
                 {
-                    int position = (y * bmpData.Stride) + (x * System.Drawing.Image.GetPixelFormatSize(bmpData.PixelFormat) / 8);
+                    int position = (y * bmpData.Stride) + (x * Image.GetPixelFormatSize(bmpData.PixelFormat) / 8);
                     blue += rgbValues[position];
                     green += rgbValues[position + 1];
                     red += rgbValues[position + 2];
@@ -565,9 +422,8 @@ namespace Mosaic_Image
             }
             bmp.UnlockBits(bmpData);
             long divider = bmp.Width * bmp.Height;
-            Color avgColor = Color.FromArgb((int)(red / divider), (int)(green / divider), (int)(blue / divider));
-            //int[] average = new int[] { blue / divider, green / divider, red / divider };
-            return avgColor;
+            Color MeanColor = Color.FromArgb((int)(red / divider), (int)(green / divider), (int)(blue / divider));
+            return MeanColor;
         }
 
 
@@ -627,28 +483,28 @@ namespace Mosaic_Image
         }
 
 
-        private string ClassifyImage(string ImagePath)
-        {
-            try
-            {
-                matlab.Execute(@"cd C:\Users\MatlabFiles\");
-            }
-            catch (Exception e)
-            {
+private string ClassifyImage(string ImagePath)
+{
+    try
+    {
+        matlab.Execute(@"cd C:\Users\MatlabFiles\");
+    }
+    catch (Exception e)
+    {
 
-            }
-            object result = null;
+    }
+    object result = null;
 
-            matlab.Feval("ClassifyImage", 1, out result, ImagePath);
+    matlab.Feval("ClassifyImage", 1, out result, ImagePath);
 
-            object[] res = result as object[];
-            object[,] cat = res[0] as object[,];
-            string Class = cat[0, 0] as string;
+    object[] res = result as object[];
+    object[,] cat = res[0] as object[,];
+    string Class = cat[0, 0] as string;
 
 
-            return Class;
+    return Class;
 
-        }
+}
 
         private void tileSize_SelectedIndexChanged(object sender, EventArgs e)
         {

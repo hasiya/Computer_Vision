@@ -12,7 +12,7 @@ namespace Mosaic_Image
         public int red { get; set; }
         public int green { get; set; }
         public int blue { get; set; }
-        public string filepath { get; set; }
+        public string filName { get; set; }
 
     }
 }
